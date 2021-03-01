@@ -9,7 +9,7 @@ namespace RockPaperScissors
 {
     public class TcpClients
     {
-        private TcpClient _tcpClient;
+        public TcpClient tcpClient { get; set; }
         private string _ipAdress;
         private int _port;
 
@@ -24,8 +24,8 @@ namespace RockPaperScissors
         {
             try
             {
-                _tcpClient = new TcpClient();
-                _tcpClient.Connect(_ipAdress, _port);
+                tcpClient = new TcpClient();
+                tcpClient.Connect(_ipAdress, _port);
             }
             catch
             {
@@ -38,7 +38,7 @@ namespace RockPaperScissors
             {
                 try
                 {
-                    if (_tcpClient != null && _tcpClient.Client != null && _tcpClient.Client.Connected)
+                    if (tcpClient != null && tcpClient.Client != null && tcpClient.Client.Connected)
                     {
                         /* pear to the documentation on Poll:
                          * When passing SelectMode.SelectRead as a parameter to the Poll method it will return 
@@ -49,10 +49,10 @@ namespace RockPaperScissors
                          */
 
                         // Detect if client disconnected
-                        if (_tcpClient.Client.Poll(0, SelectMode.SelectRead))
+                        if (tcpClient.Client.Poll(0, SelectMode.SelectRead))
                         {
                             byte[] buff = new byte[1];
-                            if (_tcpClient.Client.Receive(buff, SocketFlags.Peek) == 0)
+                            if (tcpClient.Client.Receive(buff, SocketFlags.Peek) == 0)
                             {
                                 // Client disconnected
                                 return false;

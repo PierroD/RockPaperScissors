@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
-using System.IO;
-using RPSMessage;
+using TestRPSServer.Models;
+using static TestRPSServer.Constants;
 
 namespace TestRPSServer
 {
     public class TcpServer
     {
         private TcpListener _server;
-        
+        private int _clients_number;
+        private List<Player> _players = new List<Player>();
         public TcpServer(int port)
         {
             _server = new TcpListener(IPAddress.Any, port);
@@ -26,15 +25,17 @@ namespace TestRPSServer
 
         private void listenClients()
         {
-            while(_server.Server.IsBound)
+            while (_server.Server.IsBound)
             {
                 try
                 {
                     TcpClient newClient = _server.AcceptTcpClient();
                     Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
+                    Player newPlayer = new Player(newClient, _clients_number++);
+                    _players.Add(newPlayer);
                     clientThread.Start(newClient);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -44,20 +45,12 @@ namespace TestRPSServer
         private void HandleClient(object obj)
         {
             TcpClient client = (TcpClient)obj;
-            byte[] buffer = new byte[1000];
+            byte[] buffer = new byte[Constants.Constants.BUFFER_SIZE];
             int byteRead = 0;
             Console.WriteLine($"Client connected");
-            /*            StreamWriter sWriter = new StreamWriter(client.GetStream(), Encoding.ASCII);
-                        StreamReader sReader = new StreamReader(client.GetStream(), Encoding.ASCII);
-                        string datas = sReader.ReadLine();
-
-                        if(!string.IsNullOrEmpty(datas))
-                        {
-                            // receive the messsage
-                        }*/
-            while ((byteRead = client.GetStream().Read(buffer , 0, 1000)) > 0)
+            while ((byteRead = client.GetStream().Read(buffer, 0, 4096)) > 0)
             {
-                Message message = Serialization.Deserialize((Message)buffer);
+                Console.WriteLine($"Message received : {Encoding.UTF8.GetString(buffer, 0, byteRead)}");
             }
         }
     }

@@ -23,7 +23,7 @@ namespace RockPaperScissors
         }
 
         private Choice current_choice;
-        private TcpClients _tcpClient;
+        private TcpClients _client;
 
 
         public Form1()
@@ -33,7 +33,7 @@ namespace RockPaperScissors
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _tcpClient = new TcpClients("127.0.0.1", 4444);
+            _client = new TcpClients("127.0.0.1", 4444);
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -73,15 +73,16 @@ namespace RockPaperScissors
         {
             while (true)
             {
-                if (_tcpClient.IsConnected)
+                if (_client.IsConnected)
                 {
                     ChangelblConnectionStatus(true);
-
+                    // TODO : Delete message send after validation
+                    SendMessage();
                 }
                 else
                 {
                     ChangelblConnectionStatus(false);
-                    _tcpClient.Retry();
+                    _client.Retry();
                 }
                 await Task.Delay(TimeSpan.FromSeconds(2), default(CancellationToken));
             }
@@ -102,6 +103,12 @@ namespace RockPaperScissors
 
             pbar_loading.Value += direction;
 
+        }
+
+        private void SendMessage()
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes("Hello server from client");
+            _client.tcpClient.GetStream().Write(buffer, 0, buffer.Length);
         }
     }
 
