@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RPSMessage;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -78,6 +79,7 @@ namespace RockPaperScissors
                     ChangelblConnectionStatus(true);
                     // TODO : Delete message send after validation
                     SendMessage();
+                    ReadMessage();
                 }
                 else
                 {
@@ -105,10 +107,31 @@ namespace RockPaperScissors
 
         }
 
+        private void ReadMessage()
+        {
+            byte[] buffer = new byte[4096];
+            int byteRead = 0;
+
+            while ((byteRead = _client.tcpClient.GetStream().Read(buffer, 0, 4096)) > 0)
+            {
+                string message = Encoding.UTF8.GetString(buffer, 0, byteRead);
+            }
+        }
+
         private void SendMessage()
         {
-            byte[] buffer = Encoding.UTF8.GetBytes("Hello server from client");
+/*            byte[] buffer = Encoding.UTF8.GetBytes("Hello server from client");
             _client.tcpClient.GetStream().Write(buffer, 0, buffer.Length);
+*/        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SocketHelper.WriteToServer(_client, Encapsulation.Serialize(Encapsulation.FromValue(new Test { nom = "test"}, MessageType.Disconnect)));
+        }
+
+        public class Test
+        {
+            public string nom { get; set; }
         }
     }
 

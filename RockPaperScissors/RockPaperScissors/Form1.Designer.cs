@@ -41,9 +41,9 @@ namespace RockPaperScissors
             this.drag_form = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.lbl_connectionStatus = new System.Windows.Forms.Label();
             this.pnl_Matchmaking = new Guna.UI2.WinForms.Guna2Panel();
-            this.timer_macthmaking = new System.Windows.Forms.Timer(this.components);
-            this.pbar_loading = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.lbl_lookingForPlayer = new System.Windows.Forms.Label();
+            this.pbar_loading = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+            this.timer_macthmaking = new System.Windows.Forms.Timer(this.components);
             this.pnl_gameChoices = new Guna.UI2.WinForms.Guna2Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Rock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Paper)).BeginInit();
@@ -180,10 +180,15 @@ namespace RockPaperScissors
             this.pnl_Matchmaking.Visible = false;
             this.pnl_Matchmaking.VisibleChanged += new System.EventHandler(this.pnl_Matchmaking_VisibleChanged);
             // 
-            // timer_macthmaking
+            // lbl_lookingForPlayer
             // 
-            this.timer_macthmaking.Interval = 50;
-            this.timer_macthmaking.Tick += new System.EventHandler(this.timer_macthmaking_Tick);
+            this.lbl_lookingForPlayer.AutoSize = true;
+            this.lbl_lookingForPlayer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_lookingForPlayer.Location = new System.Drawing.Point(79, 28);
+            this.lbl_lookingForPlayer.Name = "lbl_lookingForPlayer";
+            this.lbl_lookingForPlayer.Size = new System.Drawing.Size(106, 13);
+            this.lbl_lookingForPlayer.TabIndex = 10;
+            this.lbl_lookingForPlayer.Text = "Looking for players";
             // 
             // pbar_loading
             // 
@@ -202,15 +207,10 @@ namespace RockPaperScissors
             this.pbar_loading.TabIndex = 0;
             this.pbar_loading.Value = 1;
             // 
-            // lbl_lookingForPlayer
+            // timer_macthmaking
             // 
-            this.lbl_lookingForPlayer.AutoSize = true;
-            this.lbl_lookingForPlayer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_lookingForPlayer.Location = new System.Drawing.Point(79, 28);
-            this.lbl_lookingForPlayer.Name = "lbl_lookingForPlayer";
-            this.lbl_lookingForPlayer.Size = new System.Drawing.Size(106, 13);
-            this.lbl_lookingForPlayer.TabIndex = 10;
-            this.lbl_lookingForPlayer.Text = "Looking for players";
+            this.timer_macthmaking.Interval = 50;
+            this.timer_macthmaking.Tick += new System.EventHandler(this.timer_macthmaking_Tick);
             // 
             // pnl_gameChoices
             // 
@@ -242,6 +242,7 @@ namespace RockPaperScissors
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RPS - by PierroD";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Rock)).EndInit();

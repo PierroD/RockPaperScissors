@@ -1,11 +1,11 @@
-﻿using System;
+﻿using RPSMessage;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using TestRPSServer.Models;
-using static TestRPSServer.Constants;
 
 namespace TestRPSServer
 {
@@ -33,7 +33,7 @@ namespace TestRPSServer
                     Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
                     Player newPlayer = new Player(newClient, _clients_number++);
                     _players.Add(newPlayer);
-                    clientThread.Start(newClient);
+                    clientThread.Start(newPlayer);
                 }
                 catch (Exception ex)
                 {
@@ -44,14 +44,34 @@ namespace TestRPSServer
 
         private void HandleClient(object obj)
         {
-            TcpClient client = (TcpClient)obj;
-            byte[] buffer = new byte[Constants.Constants.BUFFER_SIZE];
+            Player player = (Player)obj;
+            byte[] buffer = new byte[Constants.BUFFER_SIZE];
             int byteRead = 0;
-            Console.WriteLine($"Client connected");
-            while ((byteRead = client.GetStream().Read(buffer, 0, 4096)) > 0)
+            Console.WriteLine($"Client {player.id} connected");
+            try
             {
-                Console.WriteLine($"Message received : {Encoding.UTF8.GetString(buffer, 0, byteRead)}");
+                while (player.tcpClient != null && (byteRead = player.tcpClient.GetStream().Read(buffer, 0, Constants.BUFFER_SIZE)) > 0)
+                {
+                    /*                Console.WriteLine($"Message received : {Encoding.UTF8.GetString(buffer, 0, byteRead)}");
+                    */
+                    /*                byte[] message = Encapsulation.Serialize(Encapsulation.FromValue(new Test { nom="John" }, MessageType.Discover));
+                                    client.GetStream().Write(message, 0, message.Length)
+                    */
+                    Encapsulation message = Encapsulation.Deserialize(buffer);
+                    Processor.MessageProcessor(message, player);
+                }
+            }
+            catch
+            {
+
             }
         }
+
+
+        public class Test
+        {
+            public string nom { get; set; }
+        }
     }
+
 }
