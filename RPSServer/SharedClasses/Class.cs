@@ -16,4 +16,12 @@ namespace SharedClasses
         public string UserName { get; set; }
     }
 
+    public class GameInfo
+    {
+        public Guid UniqueId { get; set; }
+        public int BestOf { get; set; }
+        public int TimeToAnswer { get; set; }
+        public string EnnemyName { get; set; }
+    }
+
 }

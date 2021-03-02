@@ -39,13 +39,13 @@ namespace RPSMessage
             return JsonConvert.DeserializeObject<T>(encapsulation.Value);
         }
 
+
     }
 
     public enum MessageType
     {
         Discover,
         Searching,
-        Found,
         GameInfo,
         NextRound,
         Result,

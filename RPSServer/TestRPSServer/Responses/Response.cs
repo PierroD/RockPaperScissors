@@ -23,5 +23,11 @@ namespace TestRPSServer
             SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GenericMessage { Message = "See you later :)" }, MessageType.Disconnect)));
 
         }
+
+        public static void GameInfoResponse(Game game)
+        {
+            foreach (Player player in game.players)
+                SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GameInfo { UniqueId = game.UniqueId, BestOf = game.BestOf, TimeToAnswer = game.TimeToAnswer, EnnemyName = game.players.FirstOrDefault(p => p.id != player.id).name }, MessageType.GameInfo)));
+        }
     }
 }

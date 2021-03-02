@@ -20,8 +20,8 @@ namespace TestRPSServer
             _server = new TcpListener(IPAddress.Any, port);
             _server.Start();
             Thread listeningThread = new Thread(listenClients);
-            listeningThread.Start();
             Thread MatchMakingThread = new Thread(MatchMakingHandle);
+            listeningThread.Start();
             MatchMakingThread.Start();
         }
 
@@ -68,14 +68,24 @@ namespace TestRPSServer
 
         private void MatchMakingHandle()
         {
-            List<Player> MatchMakingQueue = new List<Player>();
-            foreach (Player player in _players)
+            while (true)
             {
-                if (player.status == Status.Searching)
-                    MatchMakingQueue.Add(player);
-                if (MatchMakingQueue.Count >= 2) // 2 is the number of player but will be stored in a .ini file
-                    Console.WriteLine("A game will be created");
+                List<Player> MatchMakingQueue = new List<Player>();
+                List<Player> players = new List<Player>(_players);
+                if (_players.Count > 0)
+                    foreach (Player player in players)
+                    {
+                        if (player.status == Status.Searching && !MatchMakingQueue.Contains(player))
+                            MatchMakingQueue.Add(player);
+                        if (MatchMakingQueue.Count >= 2) // 2 is the number of player but will be stored in a .ini file
+                        {
+                            foreach (Player game_player in MatchMakingQueue)
+                                game_player.status = Status.Alive;
+                            new Game(MatchMakingQueue);
+                        }
 
+                    }
+                Thread.Sleep(TimeSpan.FromSeconds(1));
             }
         }
 

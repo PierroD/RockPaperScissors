@@ -32,12 +32,10 @@ namespace RockPaperScissors
             this.components = new System.ComponentModel.Container();
             this.lbl_title = new System.Windows.Forms.Label();
             this.btn_close = new Guna.UI2.WinForms.Guna2ControlBox();
-            this.pic_Rock = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.pic_Paper = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.pic_Scissors = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.pbox_Rock = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.pbox_Paper = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.pbox_Scissors = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.btn_play = new Guna.UI2.WinForms.Guna2Button();
-            this.lbl_youChoose = new System.Windows.Forms.Label();
-            this.lbl_choice = new System.Windows.Forms.Label();
             this.drag_form = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.lbl_connectionStatus = new System.Windows.Forms.Label();
             this.pnl_Matchmaking = new Guna.UI2.WinForms.Guna2Panel();
@@ -45,11 +43,20 @@ namespace RockPaperScissors
             this.pbar_loading = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.timer_macthmaking = new System.Windows.Forms.Timer(this.components);
             this.pnl_gameChoices = new Guna.UI2.WinForms.Guna2Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Rock)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Paper)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Scissors)).BeginInit();
+            this.pbox_answer = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.lbl_you = new System.Windows.Forms.Label();
+            this.lbl_ennemy = new System.Windows.Forms.Label();
+            this.lbl_vs = new System.Windows.Forms.Label();
+            this.lbl_youScore = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnl_results = new Guna.UI2.WinForms.Guna2Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_Rock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_Paper)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_Scissors)).BeginInit();
             this.pnl_Matchmaking.SuspendLayout();
             this.pnl_gameChoices.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_answer)).BeginInit();
+            this.pnl_results.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_title
@@ -76,47 +83,47 @@ namespace RockPaperScissors
             this.btn_close.Size = new System.Drawing.Size(45, 29);
             this.btn_close.TabIndex = 1;
             // 
-            // pic_Rock
+            // pbox_Rock
             // 
-            this.pic_Rock.BackColor = System.Drawing.Color.Transparent;
-            this.pic_Rock.Image = global::RockPaperScissors.Properties.Resources.rock;
-            this.pic_Rock.Location = new System.Drawing.Point(9, 15);
-            this.pic_Rock.Name = "pic_Rock";
-            this.pic_Rock.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pic_Rock.ShadowDecoration.Parent = this.pic_Rock;
-            this.pic_Rock.Size = new System.Drawing.Size(70, 70);
-            this.pic_Rock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_Rock.TabIndex = 2;
-            this.pic_Rock.TabStop = false;
-            this.pic_Rock.Click += new System.EventHandler(this.Choice_Click);
+            this.pbox_Rock.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Rock.Image = global::RockPaperScissors.Properties.Resources.rock;
+            this.pbox_Rock.Location = new System.Drawing.Point(9, 15);
+            this.pbox_Rock.Name = "pbox_Rock";
+            this.pbox_Rock.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_Rock.ShadowDecoration.Parent = this.pbox_Rock;
+            this.pbox_Rock.Size = new System.Drawing.Size(70, 70);
+            this.pbox_Rock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_Rock.TabIndex = 2;
+            this.pbox_Rock.TabStop = false;
+            this.pbox_Rock.Click += new System.EventHandler(this.Choice_Click);
             // 
-            // pic_Paper
+            // pbox_Paper
             // 
-            this.pic_Paper.BackColor = System.Drawing.Color.Transparent;
-            this.pic_Paper.Image = global::RockPaperScissors.Properties.Resources.paper;
-            this.pic_Paper.Location = new System.Drawing.Point(115, 15);
-            this.pic_Paper.Name = "pic_Paper";
-            this.pic_Paper.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pic_Paper.ShadowDecoration.Parent = this.pic_Paper;
-            this.pic_Paper.Size = new System.Drawing.Size(70, 70);
-            this.pic_Paper.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_Paper.TabIndex = 3;
-            this.pic_Paper.TabStop = false;
-            this.pic_Paper.Click += new System.EventHandler(this.Choice_Click);
+            this.pbox_Paper.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Paper.Image = global::RockPaperScissors.Properties.Resources.paper;
+            this.pbox_Paper.Location = new System.Drawing.Point(115, 15);
+            this.pbox_Paper.Name = "pbox_Paper";
+            this.pbox_Paper.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_Paper.ShadowDecoration.Parent = this.pbox_Paper;
+            this.pbox_Paper.Size = new System.Drawing.Size(70, 70);
+            this.pbox_Paper.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_Paper.TabIndex = 3;
+            this.pbox_Paper.TabStop = false;
+            this.pbox_Paper.Click += new System.EventHandler(this.Choice_Click);
             // 
-            // pic_Scissors
+            // pbox_Scissors
             // 
-            this.pic_Scissors.BackColor = System.Drawing.Color.Transparent;
-            this.pic_Scissors.Image = global::RockPaperScissors.Properties.Resources.scissors;
-            this.pic_Scissors.Location = new System.Drawing.Point(221, 15);
-            this.pic_Scissors.Name = "pic_Scissors";
-            this.pic_Scissors.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pic_Scissors.ShadowDecoration.Parent = this.pic_Scissors;
-            this.pic_Scissors.Size = new System.Drawing.Size(70, 70);
-            this.pic_Scissors.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_Scissors.TabIndex = 4;
-            this.pic_Scissors.TabStop = false;
-            this.pic_Scissors.Click += new System.EventHandler(this.Choice_Click);
+            this.pbox_Scissors.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Scissors.Image = global::RockPaperScissors.Properties.Resources.scissors;
+            this.pbox_Scissors.Location = new System.Drawing.Point(221, 15);
+            this.pbox_Scissors.Name = "pbox_Scissors";
+            this.pbox_Scissors.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_Scissors.ShadowDecoration.Parent = this.pbox_Scissors;
+            this.pbox_Scissors.Size = new System.Drawing.Size(70, 70);
+            this.pbox_Scissors.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_Scissors.TabIndex = 4;
+            this.pbox_Scissors.TabStop = false;
+            this.pbox_Scissors.Click += new System.EventHandler(this.Choice_Click);
             // 
             // btn_play
             // 
@@ -132,26 +139,7 @@ namespace RockPaperScissors
             this.btn_play.Size = new System.Drawing.Size(180, 45);
             this.btn_play.TabIndex = 5;
             this.btn_play.Text = "PLAY";
-            // 
-            // lbl_youChoose
-            // 
-            this.lbl_youChoose.AutoSize = true;
-            this.lbl_youChoose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_youChoose.Location = new System.Drawing.Point(114, 74);
-            this.lbl_youChoose.Name = "lbl_youChoose";
-            this.lbl_youChoose.Size = new System.Drawing.Size(96, 21);
-            this.lbl_youChoose.TabIndex = 6;
-            this.lbl_youChoose.Text = "You choose :";
-            this.lbl_youChoose.Visible = false;
-            // 
-            // lbl_choice
-            // 
-            this.lbl_choice.AutoSize = true;
-            this.lbl_choice.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_choice.Location = new System.Drawing.Point(138, 106);
-            this.lbl_choice.Name = "lbl_choice";
-            this.lbl_choice.Size = new System.Drawing.Size(0, 17);
-            this.lbl_choice.TabIndex = 7;
+            this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
             // 
             // drag_form
             // 
@@ -162,7 +150,7 @@ namespace RockPaperScissors
             // 
             this.lbl_connectionStatus.AutoSize = true;
             this.lbl_connectionStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_connectionStatus.Location = new System.Drawing.Point(14, 39);
+            this.lbl_connectionStatus.Location = new System.Drawing.Point(56, 14);
             this.lbl_connectionStatus.Name = "lbl_connectionStatus";
             this.lbl_connectionStatus.Size = new System.Drawing.Size(63, 13);
             this.lbl_connectionStatus.TabIndex = 8;
@@ -172,7 +160,7 @@ namespace RockPaperScissors
             // 
             this.pnl_Matchmaking.Controls.Add(this.lbl_lookingForPlayer);
             this.pnl_Matchmaking.Controls.Add(this.pbar_loading);
-            this.pnl_Matchmaking.Location = new System.Drawing.Point(29, 65);
+            this.pnl_Matchmaking.Location = new System.Drawing.Point(21, 44);
             this.pnl_Matchmaking.Name = "pnl_Matchmaking";
             this.pnl_Matchmaking.ShadowDecoration.Parent = this.pnl_Matchmaking;
             this.pnl_Matchmaking.Size = new System.Drawing.Size(264, 100);
@@ -214,9 +202,10 @@ namespace RockPaperScissors
             // 
             // pnl_gameChoices
             // 
-            this.pnl_gameChoices.Controls.Add(this.pic_Paper);
-            this.pnl_gameChoices.Controls.Add(this.pic_Rock);
-            this.pnl_gameChoices.Controls.Add(this.pic_Scissors);
+            this.pnl_gameChoices.Controls.Add(this.pbox_answer);
+            this.pnl_gameChoices.Controls.Add(this.pbox_Paper);
+            this.pnl_gameChoices.Controls.Add(this.pbox_Rock);
+            this.pnl_gameChoices.Controls.Add(this.pbox_Scissors);
             this.pnl_gameChoices.Controls.Add(this.btn_play);
             this.pnl_gameChoices.Location = new System.Drawing.Point(12, 173);
             this.pnl_gameChoices.Name = "pnl_gameChoices";
@@ -225,16 +214,100 @@ namespace RockPaperScissors
             this.pnl_gameChoices.TabIndex = 10;
             this.pnl_gameChoices.Visible = false;
             // 
+            // pbox_answer
+            // 
+            this.pbox_answer.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_answer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.pbox_answer.Location = new System.Drawing.Point(33, 91);
+            this.pbox_answer.Name = "pbox_answer";
+            this.pbox_answer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_answer.ShadowDecoration.Parent = this.pbox_answer;
+            this.pbox_answer.Size = new System.Drawing.Size(20, 20);
+            this.pbox_answer.TabIndex = 6;
+            this.pbox_answer.TabStop = false;
+            // 
+            // lbl_you
+            // 
+            this.lbl_you.AutoSize = true;
+            this.lbl_you.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_you.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.lbl_you.Location = new System.Drawing.Point(64, 17);
+            this.lbl_you.Name = "lbl_you";
+            this.lbl_you.Size = new System.Drawing.Size(31, 17);
+            this.lbl_you.TabIndex = 11;
+            this.lbl_you.Text = "You";
+            this.lbl_you.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_ennemy
+            // 
+            this.lbl_ennemy.AutoSize = true;
+            this.lbl_ennemy.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ennemy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.lbl_ennemy.Location = new System.Drawing.Point(124, 17);
+            this.lbl_ennemy.Name = "lbl_ennemy";
+            this.lbl_ennemy.Size = new System.Drawing.Size(0, 17);
+            this.lbl_ennemy.TabIndex = 12;
+            this.lbl_ennemy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_vs
+            // 
+            this.lbl_vs.AutoSize = true;
+            this.lbl_vs.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_vs.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_vs.Location = new System.Drawing.Point(98, 17);
+            this.lbl_vs.Name = "lbl_vs";
+            this.lbl_vs.Size = new System.Drawing.Size(23, 17);
+            this.lbl_vs.TabIndex = 13;
+            this.lbl_vs.Text = "VS";
+            this.lbl_vs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_youScore
+            // 
+            this.lbl_youScore.AutoSize = true;
+            this.lbl_youScore.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_youScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.lbl_youScore.Location = new System.Drawing.Point(71, 44);
+            this.lbl_youScore.Name = "lbl_youScore";
+            this.lbl_youScore.Size = new System.Drawing.Size(15, 17);
+            this.lbl_youScore.TabIndex = 14;
+            this.lbl_youScore.Text = "0";
+            this.lbl_youScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.label1.Location = new System.Drawing.Point(130, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 17);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "0";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnl_results
+            // 
+            this.pnl_results.Controls.Add(this.lbl_ennemy);
+            this.pnl_results.Controls.Add(this.lbl_you);
+            this.pnl_results.Controls.Add(this.label1);
+            this.pnl_results.Controls.Add(this.lbl_vs);
+            this.pnl_results.Controls.Add(this.lbl_youScore);
+            this.pnl_results.Location = new System.Drawing.Point(44, 44);
+            this.pnl_results.Name = "pnl_results";
+            this.pnl_results.ShadowDecoration.Parent = this.pnl_results;
+            this.pnl_results.Size = new System.Drawing.Size(231, 96);
+            this.pnl_results.TabIndex = 16;
+            this.pnl_results.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(322, 401);
+            this.Controls.Add(this.pnl_results);
             this.Controls.Add(this.pnl_Matchmaking);
             this.Controls.Add(this.lbl_connectionStatus);
-            this.Controls.Add(this.lbl_choice);
-            this.Controls.Add(this.lbl_youChoose);
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.lbl_title);
             this.Controls.Add(this.pnl_gameChoices);
@@ -245,12 +318,15 @@ namespace RockPaperScissors
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Rock)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Paper)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Scissors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_Rock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_Paper)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_Scissors)).EndInit();
             this.pnl_Matchmaking.ResumeLayout(false);
             this.pnl_Matchmaking.PerformLayout();
             this.pnl_gameChoices.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_answer)).EndInit();
+            this.pnl_results.ResumeLayout(false);
+            this.pnl_results.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,12 +336,10 @@ namespace RockPaperScissors
 
         private System.Windows.Forms.Label lbl_title;
         private Guna.UI2.WinForms.Guna2ControlBox btn_close;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox pic_Rock;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox pic_Paper;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox pic_Scissors;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox pbox_Rock;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox pbox_Paper;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox pbox_Scissors;
         private Guna.UI2.WinForms.Guna2Button btn_play;
-        private System.Windows.Forms.Label lbl_youChoose;
-        private System.Windows.Forms.Label lbl_choice;
         private Guna.UI2.WinForms.Guna2DragControl drag_form;
         private System.Windows.Forms.Label lbl_connectionStatus;
         private Guna.UI2.WinForms.Guna2Panel pnl_Matchmaking;
@@ -273,6 +347,13 @@ namespace RockPaperScissors
         private System.Windows.Forms.Label lbl_lookingForPlayer;
         private Guna.UI2.WinForms.Guna2CircleProgressBar pbar_loading;
         private Guna.UI2.WinForms.Guna2Panel pnl_gameChoices;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox pbox_answer;
+        private System.Windows.Forms.Label lbl_ennemy;
+        private System.Windows.Forms.Label lbl_you;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_youScore;
+        private System.Windows.Forms.Label lbl_vs;
+        private Guna.UI2.WinForms.Guna2Panel pnl_results;
     }
 }
 

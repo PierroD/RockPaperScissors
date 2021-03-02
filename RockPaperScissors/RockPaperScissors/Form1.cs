@@ -17,14 +17,8 @@ namespace RockPaperScissors
     public partial class Form1 : Form
     {
 
-        private enum Choice
-        {
-            Rock,
-            Paper,
-            Scissors
-        }
 
-        private Choice current_choice;
+        private Answer player_answer;
         public TcpClients _client { get; set; }
 
 
@@ -47,9 +41,9 @@ namespace RockPaperScissors
         private void Choice_Click(object sender, EventArgs e)
         {
             Guna.UI2.WinForms.Guna2CirclePictureBox ImageClicked = (Guna.UI2.WinForms.Guna2CirclePictureBox)sender;
-            lbl_youChoose.Visible = true;
-            Enum.TryParse(ImageClicked.Name.Substring(4), out Choice current_choice);
-            lbl_choice.Text = current_choice.ToString();
+            Enum.TryParse(ImageClicked.Name.Substring(5), out Answer player_answer); // delete pbox_ in the name of the button 
+            pbox_answer.Location = new Point((ImageClicked.Location.X + (ImageClicked.Width/2) - (pbox_answer.Width/2)), pbox_answer.Location.Y);
+
         }
 
         private void ChangelblConnectionStatus(bool connected)
@@ -130,19 +124,16 @@ namespace RockPaperScissors
 
         }
 
-        private void SendMessage()
-        {
-            /*            byte[] buffer = Encoding.UTF8.GetBytes("Hello server from client");
-                        _client.tcpClient.GetStream().Write(buffer, 0, buffer.Length);
-            */
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Response.DisconnectMessage(_client);
             _client.tcpClient.Close();
         }
 
+        private void btn_play_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 
 }
