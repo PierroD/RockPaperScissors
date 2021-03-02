@@ -12,7 +12,7 @@ namespace TestRPSServer
     {
         static void Main(string[] args)
         {
-            TcpServer server = new TcpServer(4444);
+            TcpServer server = new TcpServer(4444); // will be stored in a .ini file later
 
         }
 

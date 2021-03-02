@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestRPSServer.Models;
 
-namespace TestRPSServer.SocketHelper
+namespace TestRPSServer
 {
     public static class SocketHelper
     {

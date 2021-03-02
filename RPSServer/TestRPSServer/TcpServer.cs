@@ -1,4 +1,5 @@
 ﻿using RPSMessage;
+using SharedClasses;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -20,6 +21,8 @@ namespace TestRPSServer
             _server.Start();
             Thread listeningThread = new Thread(listenClients);
             listeningThread.Start();
+            Thread MatchMakingThread = new Thread(MatchMakingHandle);
+            MatchMakingThread.Start();
         }
 
 
@@ -46,17 +49,13 @@ namespace TestRPSServer
         {
             Player player = (Player)obj;
             byte[] buffer = new byte[Constants.BUFFER_SIZE];
-            int byteRead = 0;
+            int byteLength = 0;
             Console.WriteLine($"Client {player.id} connected");
+            Response.DiscoverResponse(player);
             try
             {
-                while (player.tcpClient != null && (byteRead = player.tcpClient.GetStream().Read(buffer, 0, Constants.BUFFER_SIZE)) > 0)
+                while (player.tcpClient != null && (byteLength = player.tcpClient.GetStream().Read(buffer, 0, Constants.BUFFER_SIZE)) > 0)
                 {
-                    /*                Console.WriteLine($"Message received : {Encoding.UTF8.GetString(buffer, 0, byteRead)}");
-                    */
-                    /*                byte[] message = Encapsulation.Serialize(Encapsulation.FromValue(new Test { nom="John" }, MessageType.Discover));
-                                    client.GetStream().Write(message, 0, message.Length)
-                    */
                     Encapsulation message = Encapsulation.Deserialize(buffer);
                     Processor.MessageProcessor(message, player);
                 }
@@ -67,11 +66,20 @@ namespace TestRPSServer
             }
         }
 
-
-        public class Test
+        private void MatchMakingHandle()
         {
-            public string nom { get; set; }
+            List<Player> MatchMakingQueue = new List<Player>();
+            foreach (Player player in _players)
+            {
+                if (player.status == Status.Searching)
+                    MatchMakingQueue.Add(player);
+                if (MatchMakingQueue.Count >= 2) // 2 is the number of player but will be stored in a .ini file
+                    Console.WriteLine("A game will be created");
+
+            }
         }
+
+
     }
 
 }

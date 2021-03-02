@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public static class Constants
+namespace SharedClasses
 {
-    public static readonly int BUFFER_SIZE = 4096;
+    public static class Constants
+    {
+        public static readonly int BUFFER_SIZE = 4096;
 
+    }
 }
-

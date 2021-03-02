@@ -14,11 +14,23 @@ namespace TestRPSServer.Models
         
         public int score { get; set; }
 
+        public string name { get; set; }
+
+        public Status status { get; set; }
+
         public Player(TcpClient tcpClient, int id)
         {
             this.tcpClient = tcpClient;
             this.id = id;
         }
 
+    }
+
+    public enum Status
+    {
+        Connected,
+        Searching,
+        Alive, 
+        Dead
     }
 }

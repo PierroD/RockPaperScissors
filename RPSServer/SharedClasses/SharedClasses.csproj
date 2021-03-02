@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8328C70B-09C7-4760-B08F-A8B322E7CE09}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TestRPSServer</RootNamespace>
-    <AssemblyName>TestRPSServer</AssemblyName>
+    <ProjectGuid>{C44DEE84-1523-4F56-B092-95A640DB7447}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharedClasses</RootNamespace>
+    <AssemblyName>SharedClasses</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,26 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Player.cs" />
-    <Compile Include="Processor\Processor.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\Response.cs" />
-    <Compile Include="SocketHelper\SocketHelper.cs" />
-    <Compile Include="TcpServer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RPSMessage\RPSMessage.csproj">
-      <Project>{fcc09eb5-9f7c-4d03-9822-9f67dc99dd43}</Project>
-      <Name>RPSMessage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharedClasses\SharedClasses.csproj">
-      <Project>{c44dee84-1523-4f56-b092-95a640db7447}</Project>
-      <Name>SharedClasses</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

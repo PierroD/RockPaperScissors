@@ -172,7 +172,7 @@ namespace RockPaperScissors
             // 
             this.pnl_Matchmaking.Controls.Add(this.lbl_lookingForPlayer);
             this.pnl_Matchmaking.Controls.Add(this.pbar_loading);
-            this.pnl_Matchmaking.Location = new System.Drawing.Point(36, 65);
+            this.pnl_Matchmaking.Location = new System.Drawing.Point(29, 65);
             this.pnl_Matchmaking.Name = "pnl_Matchmaking";
             this.pnl_Matchmaking.ShadowDecoration.Parent = this.pnl_Matchmaking;
             this.pnl_Matchmaking.Size = new System.Drawing.Size(264, 100);
@@ -196,7 +196,7 @@ namespace RockPaperScissors
             this.pbar_loading.AnimationSpeed = 1F;
             this.pbar_loading.FillColor = System.Drawing.Color.White;
             this.pbar_loading.FillThickness = 4;
-            this.pbar_loading.Location = new System.Drawing.Point(120, 56);
+            this.pbar_loading.Location = new System.Drawing.Point(117, 56);
             this.pbar_loading.Name = "pbar_loading";
             this.pbar_loading.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.pbar_loading.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SharedClasses;
 
 namespace RockPaperScissors
 {
@@ -24,7 +25,7 @@ namespace RockPaperScissors
         }
 
         private Choice current_choice;
-        private TcpClients _client;
+        public TcpClients _client { get; set; }
 
 
         public Form1()
@@ -53,33 +54,37 @@ namespace RockPaperScissors
 
         private void ChangelblConnectionStatus(bool connected)
         {
-            if (connected)
+            try
             {
-                this.Invoke(new MethodInvoker(delegate
+                if (connected)
                 {
-                    lbl_connectionStatus.Text = "Connected";
-                    lbl_connectionStatus.ForeColor = Color.Green;
-                }));
-            }
-            else
-            {
-                this.Invoke(new MethodInvoker(delegate
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        lbl_connectionStatus.Text = "Connected";
+                        lbl_connectionStatus.ForeColor = Color.Green;
+                    }));
+                }
+                else
                 {
-                    lbl_connectionStatus.Text = "Not Connected";
-                    lbl_connectionStatus.ForeColor = Color.Red;
-                }));
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        lbl_connectionStatus.Text = "Not Connected";
+                        lbl_connectionStatus.ForeColor = Color.Red;
+                    }));
+                }
             }
+            catch { }
         }
         private async void ConnectToServer()
         {
+            Thread readThread = new Thread(ReadMessage);
             while (true)
             {
                 if (_client.IsConnected)
                 {
                     ChangelblConnectionStatus(true);
-                    // TODO : Delete message send after validation
-                    SendMessage();
-                    ReadMessage();
+                    if (readThread.ThreadState != ThreadState.Running && !readThread.IsAlive)
+                        readThread.Start();
                 }
                 else
                 {
@@ -109,30 +114,35 @@ namespace RockPaperScissors
 
         private void ReadMessage()
         {
-            byte[] buffer = new byte[4096];
-            int byteRead = 0;
-
-            while ((byteRead = _client.tcpClient.GetStream().Read(buffer, 0, 4096)) > 0)
+            byte[] buffer = new byte[Constants.BUFFER_SIZE];
+            int byteLength = 0;
+            try
             {
-                string message = Encoding.UTF8.GetString(buffer, 0, byteRead);
+                while ((byteLength = _client.tcpClient.GetStream().Read(buffer, 0, Constants.BUFFER_SIZE)) > 0)
+                {
+                    Processor.MessageProcessor(this, Encapsulation.Deserialize(buffer), _client);
+                }
             }
+            catch
+            {
+
+            }
+
         }
 
         private void SendMessage()
         {
-/*            byte[] buffer = Encoding.UTF8.GetBytes("Hello server from client");
-            _client.tcpClient.GetStream().Write(buffer, 0, buffer.Length);
-*/        }
+            /*            byte[] buffer = Encoding.UTF8.GetBytes("Hello server from client");
+                        _client.tcpClient.GetStream().Write(buffer, 0, buffer.Length);
+            */
+        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SocketHelper.WriteToServer(_client, Encapsulation.Serialize(Encapsulation.FromValue(new Test { nom = "test"}, MessageType.Disconnect)));
+            Response.DisconnectMessage(_client);
+            _client.tcpClient.Close();
         }
 
-        public class Test
-        {
-            public string nom { get; set; }
-        }
     }
 
 }
