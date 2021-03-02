@@ -18,7 +18,7 @@ namespace RockPaperScissors
     {
 
 
-        private Answer player_answer;
+        private Choice playerChoice;
         public TcpClients _client { get; set; }
 
 
@@ -41,7 +41,7 @@ namespace RockPaperScissors
         private void Choice_Click(object sender, EventArgs e)
         {
             Guna.UI2.WinForms.Guna2CirclePictureBox ImageClicked = (Guna.UI2.WinForms.Guna2CirclePictureBox)sender;
-            Enum.TryParse(ImageClicked.Name.Substring(5), out Answer player_answer); // delete pbox_ in the name of the button 
+            Enum.TryParse(ImageClicked.Name.Substring(5), out Choice playerChoice); // delete pbox_ in the name of the button 
             pbox_answer.Location = new Point((ImageClicked.Location.X + (ImageClicked.Width/2) - (pbox_answer.Width/2)), pbox_answer.Location.Y);
 
         }
@@ -132,7 +132,7 @@ namespace RockPaperScissors
 
         private void btn_play_Click(object sender, EventArgs e)
         {
-            
+            Response.AnswerResponse(_client, playerChoice, 0);
         }
     }
 

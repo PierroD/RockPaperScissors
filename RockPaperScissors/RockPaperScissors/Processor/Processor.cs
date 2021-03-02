@@ -26,6 +26,7 @@ namespace RockPaperScissors
                     Environment.Exit(0);
                     break;
                 case MessageType.GameInfo:
+                    setGameInfo(message);
                     toogleGame_View(form, message);
                     break;
             }
@@ -40,6 +41,15 @@ namespace RockPaperScissors
             }));
         }
 
+        public static void setGameInfo(Encapsulation message)
+        {
+            var gameInfo = Encapsulation.Deserialize<SharedClasses.GameInfo>(message);
+            GameInfo.UniqueId = gameInfo.UniqueId;
+            GameInfo.BestOf = gameInfo.BestOf;
+            GameInfo.TimeToAnswer = gameInfo.TimeToAnswer;
+            GameInfo.EnnemyName = gameInfo.EnnemyName;
+        }
+
         public static void toogleGame_View(Form form, Encapsulation message)
         {
             form.Invoke(new MethodInvoker(delegate
@@ -47,7 +57,7 @@ namespace RockPaperScissors
                 form.Controls.Find("pnl_Matchmaking", true).FirstOrDefault().Visible = false;
                 form.Controls.Find("pnl_gameChoices", true).FirstOrDefault().Visible = true;
                 form.Controls.Find("pnl_results", true).FirstOrDefault().Visible = true;
-                form.Controls.Find("lbl_ennemy", true).FirstOrDefault().Text = Encapsulation.Deserialize<GameInfo>(message).EnnemyName;
+                form.Controls.Find("lbl_ennemy", true).FirstOrDefault().Text = GameInfo.EnnemyName;
             }));
         }
 

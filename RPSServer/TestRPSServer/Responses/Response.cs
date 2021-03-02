@@ -26,8 +26,9 @@ namespace TestRPSServer
 
         public static void GameInfoResponse(Game game)
         {
+            Guid roundGuid = Guid.NewGuid();
             foreach (Player player in game.players)
-                SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GameInfo { UniqueId = game.UniqueId, BestOf = game.BestOf, TimeToAnswer = game.TimeToAnswer, EnnemyName = game.players.FirstOrDefault(p => p.id != player.id).name }, MessageType.GameInfo)));
+                SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GameInfo { UniqueId = game.UniqueId, FirstRoundGuid = roundGuid, BestOf = game.BestOf, TimeToAnswer = game.TimeToAnswer, EnnemyName = game.players.FirstOrDefault(p => p.id != player.id).name }, MessageType.GameInfo)));
         }
     }
 }

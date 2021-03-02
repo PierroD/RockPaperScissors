@@ -26,6 +26,12 @@ namespace RockPaperScissors
             SocketHelper.WriteToServer(client, Encapsulation.Serialize(Encapsulation.FromValue(new GenericMessage { Message = "Looking for a game" }, MessageType.Searching)));
 
         }
+
+        public static void AnswerResponse(TcpClients client, Choice playerChoice, int TimeToAnswer)
+        {
+            SocketHelper.WriteToServer(client, Encapsulation.Serialize(Encapsulation.FromValue(new Answer { GameId = GameInfo.UniqueId, TimeToAnswer = TimeToAnswer, playerChoice = playerChoice }, MessageType. Answer)));
+
+        }
     }
 
 }

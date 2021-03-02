@@ -47,8 +47,8 @@ namespace RPSMessage
         Discover,
         Searching,
         GameInfo,
+        Answer,
         NextRound,
-        Result,
         Disconnect
     }
 }

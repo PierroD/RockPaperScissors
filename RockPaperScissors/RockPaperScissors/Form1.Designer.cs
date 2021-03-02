@@ -86,6 +86,7 @@ namespace RockPaperScissors
             // pbox_Rock
             // 
             this.pbox_Rock.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Rock.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbox_Rock.Image = global::RockPaperScissors.Properties.Resources.rock;
             this.pbox_Rock.Location = new System.Drawing.Point(9, 15);
             this.pbox_Rock.Name = "pbox_Rock";
@@ -100,6 +101,7 @@ namespace RockPaperScissors
             // pbox_Paper
             // 
             this.pbox_Paper.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Paper.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbox_Paper.Image = global::RockPaperScissors.Properties.Resources.paper;
             this.pbox_Paper.Location = new System.Drawing.Point(115, 15);
             this.pbox_Paper.Name = "pbox_Paper";
@@ -114,6 +116,7 @@ namespace RockPaperScissors
             // pbox_Scissors
             // 
             this.pbox_Scissors.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Scissors.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbox_Scissors.Image = global::RockPaperScissors.Properties.Resources.scissors;
             this.pbox_Scissors.Location = new System.Drawing.Point(221, 15);
             this.pbox_Scissors.Name = "pbox_Scissors";
@@ -129,6 +132,7 @@ namespace RockPaperScissors
             // 
             this.btn_play.BorderRadius = 5;
             this.btn_play.CheckedState.Parent = this.btn_play;
+            this.btn_play.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_play.CustomImages.Parent = this.btn_play;
             this.btn_play.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btn_play.ForeColor = System.Drawing.Color.White;
