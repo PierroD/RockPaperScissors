@@ -97,6 +97,7 @@ namespace TestRPSServer
                     else
                     {
                         Console.WriteLine($"Player {current_round.Winner.name} with id : {current_round.Winner.id} Win the BestOf {current_game.BestOf}");
+                        Response.WinAndLoseResponse(current_game);
                     }
                 }
             }

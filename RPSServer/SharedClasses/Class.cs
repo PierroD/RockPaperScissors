@@ -41,4 +41,9 @@ namespace SharedClasses
         public int BestOfScore { get; set; }
         public WinStatus PlayerWinStatus { get; set; }
     }
+
+    public class GameEnd
+    {
+        public WinStatus PlayerWinStatus { get; set; }
+    }
 }

@@ -36,7 +36,8 @@
     <Reference Include="Guna.UI2, Version=2.0.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.1.4\lib\net40\Guna.UI2.dll</HintPath>
     </Reference>
-    <Reference Include="RPSMessage">
+    <Reference Include="RPSMessage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\RPSServer\RPSMessage\bin\Debug\RPSMessage.dll</HintPath>
     </Reference>
     <Reference Include="SharedClasses">
@@ -68,6 +69,25 @@
     <Compile Include="Response\Response.cs" />
     <Compile Include="SocketHelper\SocketHelper.cs" />
     <Compile Include="TcpClients.cs" />
+    <Compile Include="Utils\openAppWindow.cs" />
+    <Compile Include="Views\Form_Lose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form_Lose.Designer.cs">
+      <DependentUpon>Form_Lose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Form_Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form_Waiting.Designer.cs">
+      <DependentUpon>Form_Waiting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Form_Win.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form_Win.Designer.cs">
+      <DependentUpon>Form_Win.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +101,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\Form_Lose.resx">
+      <DependentUpon>Form_Lose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Form_Waiting.resx">
+      <DependentUpon>Form_Waiting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Form_Win.resx">
+      <DependentUpon>Form_Win.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -103,6 +132,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\scissors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animation_500_klxv0vid.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animation_500_klxwjgse.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animation_500_klxzz8np.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

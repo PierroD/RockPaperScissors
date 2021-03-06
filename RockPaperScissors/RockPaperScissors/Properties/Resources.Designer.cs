@@ -63,6 +63,36 @@ namespace RockPaperScissors.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap animation_500_klxv0vid {
+            get {
+                object obj = ResourceManager.GetObject("animation_500_klxv0vid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap animation_500_klxwjgse {
+            get {
+                object obj = ResourceManager.GetObject("animation_500_klxwjgse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap animation_500_klxzz8np {
+            get {
+                object obj = ResourceManager.GetObject("animation_500_klxzz8np", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap paper {
             get {
                 object obj = ResourceManager.GetObject("paper", resourceCulture);

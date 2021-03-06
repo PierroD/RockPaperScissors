@@ -36,9 +36,17 @@ namespace TestRPSServer
             Guid roundGuid = Guid.NewGuid();
             foreach (Player player in game.players)
             {
+                WinStatus winStatus = getGameResult(game, player); 
+                SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new RoundInfo { UniqueId = roundGuid, PlayerWinStatus = winStatus }, MessageType.NextRound)));
+            }
+        }
+
+        public static void WinAndLoseResponse(Game game)
+        {
+            foreach (Player player in game.players)
+            {
                 WinStatus winStatus = getGameResult(game, player);
-                byte[] response = Encapsulation.Serialize(Encapsulation.FromValue(new RoundInfo { UniqueId = roundGuid, PlayerWinStatus = winStatus }, MessageType.NextRound));
-                SocketHelper.WriteToPlayer(player, response);
+                SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue( new GameEnd { PlayerWinStatus = winStatus }, MessageType.GameEnd)));
             }
         }
 
@@ -51,5 +59,7 @@ namespace TestRPSServer
                     return WinStatus.Lose;
             return WinStatus.Tie;
         }
+
+
     }
 }

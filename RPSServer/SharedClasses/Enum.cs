@@ -7,6 +7,17 @@ using System.Threading.Tasks;
 namespace SharedClasses
 {
 
+    public enum MessageType
+    {
+        Discover,
+        Searching,
+        GameInfo,
+        Answer,
+        NextRound,
+        GameEnd,
+        Disconnect
+    }
+
     public enum Choice
     {
         Rock = 0,

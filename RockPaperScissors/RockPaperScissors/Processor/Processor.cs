@@ -1,4 +1,5 @@
-﻿using RPSMessage;
+﻿using RockPaperScissors.Views;
+using RPSMessage;
 using SharedClasses;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace RockPaperScissors
 {
     public static class Processor
     {
+
         public static void MessageProcessor(Form form, Encapsulation message, TcpClients client)
         {
             switch (message.MessageType)
@@ -30,13 +32,16 @@ namespace RockPaperScissors
                     toogleGame_View(form, true);
                     break;
                 case MessageType.NextRound:
+                    CloseWaitingWindows();
                     setNextRoundInfo(form, message);
+                    break;
+                case MessageType.GameEnd:
+                    gameEndProcessor(form, message);
                     break;
             }
         }
 
-
-        public static void toogleMatchMaking_View(Form form)
+        private static void toogleMatchMaking_View(Form form)
         {
             form.Invoke(new MethodInvoker(delegate
             {
@@ -44,7 +49,7 @@ namespace RockPaperScissors
             }));
         }
 
-        public static void setGameInfo(Encapsulation message)
+        private static void setGameInfo(Encapsulation message)
         {
             var gameInfo = Encapsulation.Deserialize<SharedClasses.GameInfo>(message);
             GameInfo.myId = gameInfo.playerId;
@@ -55,21 +60,36 @@ namespace RockPaperScissors
             GameInfo.EnnemyName = gameInfo.EnnemyName;
         }
 
-        public static void toogleGame_View(Form form, bool enable)
+        private static void toogleGame_View(Form form, bool enable)
         {
             form.Invoke(new MethodInvoker(delegate
             {
                 form.Controls.Find("pnl_Matchmaking", true).FirstOrDefault().Visible = !enable;
                 form.Controls.Find("pnl_gameChoices", true).FirstOrDefault().Visible = enable;
                 form.Controls.Find("pnl_results", true).FirstOrDefault().Visible = enable;
+                form.Controls.Find("lbl_bestOf", true).FirstOrDefault().Visible = enable;
                 form.Controls.Find("lbl_ennemy", true).FirstOrDefault().Text = GameInfo.EnnemyName;
                 form.Controls.Find("lbl_bestOf", true).FirstOrDefault().Text += GameInfo.BestOf.ToString();
             }));
         }
 
-        public static void setNextRoundInfo(Form form, Encapsulation message)
+        static Thread waitingThread;
+        public static void OpenWaitingWindows(Form form)
         {
-            var roundInfo = Encapsulation.Deserialize<SharedClasses.RoundInfo>(message);
+            waitingThread = new Thread(() => openAppWindow.OpenWindow(form, new Form_Waiting()));
+            waitingThread.Start();
+        }
+
+        private static void CloseWaitingWindows()
+        {
+            if (waitingThread.IsAlive)
+                waitingThread.Abort();
+        }
+
+
+        private static void setNextRoundInfo(Form form, Encapsulation message)
+        {
+            var roundInfo = Encapsulation.Deserialize<RoundInfo>(message);
             GameInfo.RoundGuid = roundInfo.UniqueId;
 
             if (roundInfo.PlayerWinStatus != WinStatus.Tie)
@@ -77,9 +97,19 @@ namespace RockPaperScissors
                 string label_name = (roundInfo.PlayerWinStatus == WinStatus.Win) ? "lbl_youScore" : "lbl_ennemyScore";
                 form.Invoke(new MethodInvoker(delegate
                 {
-                    form.Controls.Find(label_name, true).FirstOrDefault().Text = $"{(int.Parse(form.Controls.Find(label_name, true).FirstOrDefault().Text)+1)}";
+                    form.Controls.Find(label_name, true).FirstOrDefault().Text = $"{(int.Parse(form.Controls.Find(label_name, true).FirstOrDefault().Text) + 1)}";
                 }));
             }
+        }
+
+        private static void gameEndProcessor(Form form, Encapsulation message)
+        {
+            var gameEnd = Encapsulation.Deserialize<GameEnd>(message);
+            if (gameEnd.PlayerWinStatus == WinStatus.Win)
+                openAppWindow.OpenWindow(form, new Form_Win());
+            else
+                openAppWindow.OpenWindow(form, new Form_Lose());
+
         }
 
     }

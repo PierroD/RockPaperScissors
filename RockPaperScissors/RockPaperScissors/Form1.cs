@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharedClasses;
+using RockPaperScissors.Views;
 
 namespace RockPaperScissors
 {
@@ -137,6 +138,7 @@ namespace RockPaperScissors
         private void btn_play_Click(object sender, EventArgs e)
         {
             Response.AnswerResponse(_client, playerChoice, 0);
+            Processor.OpenWaitingWindows(this);
         }
     }
 

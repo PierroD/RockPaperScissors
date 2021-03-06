@@ -50,5 +50,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedClasses\SharedClasses.csproj">
+      <Project>{c44dee84-1523-4f56-b092-95a640db7447}</Project>
+      <Name>SharedClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

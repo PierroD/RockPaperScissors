@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using SharedClasses;
 
 namespace RPSMessage
 {
@@ -42,13 +43,5 @@ namespace RPSMessage
 
     }
 
-    public enum MessageType
-    {
-        Discover,
-        Searching,
-        GameInfo,
-        Answer,
-        NextRound,
-        Disconnect
-    }
+
 }
