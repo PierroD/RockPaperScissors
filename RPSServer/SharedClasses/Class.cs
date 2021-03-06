@@ -26,12 +26,19 @@ namespace SharedClasses
 
     public class GameInfo
     {
+        public int playerId { get; set; }
         public Guid UniqueId { get; set; }
-
         public Guid FirstRoundGuid { get; set; }
         public int BestOf { get; set; }
+        public int BestOfScore { get; set; }
         public int TimeToAnswer { get; set; }
         public string EnnemyName { get; set; }
     }
 
+    public class RoundInfo
+    {
+        public Guid UniqueId { get; set; }
+        public int BestOfScore { get; set; }
+        public WinStatus PlayerWinStatus { get; set; }
+    }
 }

@@ -11,7 +11,11 @@ namespace RockPaperScissors
     {
         public static void WriteToServer(TcpClients client, byte[] message)
         {
-            client.tcpClient.GetStream().Write(message, 0, message.Length);
+            try
+            {
+                client.tcpClient.GetStream().Write(message, 0, message.Length);
+            }
+            catch { }
         }
 
 

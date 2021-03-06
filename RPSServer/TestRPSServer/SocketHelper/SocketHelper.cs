@@ -13,7 +13,5 @@ namespace TestRPSServer
         {
             player.tcpClient.GetStream().Write(message, 0, message.Length);
         }
-
-
     }
 }

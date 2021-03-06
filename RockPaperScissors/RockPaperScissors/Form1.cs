@@ -41,7 +41,7 @@ namespace RockPaperScissors
         private void Choice_Click(object sender, EventArgs e)
         {
             Guna.UI2.WinForms.Guna2CirclePictureBox ImageClicked = (Guna.UI2.WinForms.Guna2CirclePictureBox)sender;
-            Enum.TryParse(ImageClicked.Name.Substring(5), out Choice playerChoice); // delete pbox_ in the name of the button 
+            playerChoice = (Choice)Enum.Parse(typeof(Choice), ImageClicked.Name.Substring(5)); // delete pbox_ in the name of the button 
             pbox_answer.Location = new Point((ImageClicked.Location.X + (ImageClicked.Width/2) - (pbox_answer.Width/2)), pbox_answer.Location.Y);
 
         }
@@ -112,9 +112,13 @@ namespace RockPaperScissors
             int byteLength = 0;
             try
             {
-                while ((byteLength = _client.tcpClient.GetStream().Read(buffer, 0, Constants.BUFFER_SIZE)) > 0)
+                while ((byteLength = _client.tcpClient.Client.Receive(buffer, 0, Constants.BUFFER_SIZE, SocketFlags.None)) > 0)
                 {
-                    Processor.MessageProcessor(this, Encapsulation.Deserialize(buffer), _client);
+                    byte[] message = new byte[Constants.BUFFER_SIZE];
+                    Array.Copy(buffer, message, byteLength);
+                    buffer = new byte[Constants.BUFFER_SIZE];
+                    Encapsulation encapsulation = Encapsulation.Deserialize(message);
+                    Processor.MessageProcessor(this, encapsulation, _client);
                 }
             }
             catch

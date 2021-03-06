@@ -48,8 +48,9 @@ namespace RockPaperScissors
             this.lbl_ennemy = new System.Windows.Forms.Label();
             this.lbl_vs = new System.Windows.Forms.Label();
             this.lbl_youScore = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_ennemyScore = new System.Windows.Forms.Label();
             this.pnl_results = new Guna.UI2.WinForms.Guna2Panel();
+            this.lbl_bestOf = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Rock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Paper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Scissors)).BeginInit();
@@ -277,23 +278,23 @@ namespace RockPaperScissors
             this.lbl_youScore.Text = "0";
             this.lbl_youScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label1
+            // lbl_ennemyScore
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
-            this.label1.Location = new System.Drawing.Point(130, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(15, 17);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "0";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_ennemyScore.AutoSize = true;
+            this.lbl_ennemyScore.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ennemyScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.lbl_ennemyScore.Location = new System.Drawing.Point(130, 44);
+            this.lbl_ennemyScore.Name = "lbl_ennemyScore";
+            this.lbl_ennemyScore.Size = new System.Drawing.Size(15, 17);
+            this.lbl_ennemyScore.TabIndex = 15;
+            this.lbl_ennemyScore.Text = "0";
+            this.lbl_ennemyScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnl_results
             // 
             this.pnl_results.Controls.Add(this.lbl_ennemy);
             this.pnl_results.Controls.Add(this.lbl_you);
-            this.pnl_results.Controls.Add(this.label1);
+            this.pnl_results.Controls.Add(this.lbl_ennemyScore);
             this.pnl_results.Controls.Add(this.lbl_vs);
             this.pnl_results.Controls.Add(this.lbl_youScore);
             this.pnl_results.Location = new System.Drawing.Point(44, 44);
@@ -303,12 +304,23 @@ namespace RockPaperScissors
             this.pnl_results.TabIndex = 16;
             this.pnl_results.Visible = false;
             // 
+            // lbl_bestOf
+            // 
+            this.lbl_bestOf.AutoSize = true;
+            this.lbl_bestOf.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_bestOf.Location = new System.Drawing.Point(126, 157);
+            this.lbl_bestOf.Name = "lbl_bestOf";
+            this.lbl_bestOf.Size = new System.Drawing.Size(50, 13);
+            this.lbl_bestOf.TabIndex = 17;
+            this.lbl_bestOf.Text = "BestOf : ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(322, 401);
+            this.Controls.Add(this.lbl_bestOf);
             this.Controls.Add(this.pnl_results);
             this.Controls.Add(this.pnl_Matchmaking);
             this.Controls.Add(this.lbl_connectionStatus);
@@ -354,10 +366,11 @@ namespace RockPaperScissors
         private Guna.UI2.WinForms.Guna2CirclePictureBox pbox_answer;
         private System.Windows.Forms.Label lbl_ennemy;
         private System.Windows.Forms.Label lbl_you;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_ennemyScore;
         private System.Windows.Forms.Label lbl_youScore;
         private System.Windows.Forms.Label lbl_vs;
         private Guna.UI2.WinForms.Guna2Panel pnl_results;
+        private System.Windows.Forms.Label lbl_bestOf;
     }
 }
 

@@ -22,6 +22,8 @@ namespace TestRPSServer.Models
             this.UniqueId = Guid.NewGuid();
             this.BestOf = 3;
             this.players = players;
+            foreach (Player player in players)
+                player.score = 0;
             this.TimeToAnswer = 5000;
             this.Rounds = new List<Round>();
             Response.GameInfoResponse(this);
@@ -38,7 +40,7 @@ namespace TestRPSServer.Models
         public Player Winner { get; set; }
     }
 
-    
+
     public class GameResult
     {
         public Player player { get; set; }

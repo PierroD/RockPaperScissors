@@ -14,5 +14,11 @@ namespace SharedClasses
         Scissors = 2
     }
 
+    public enum WinStatus
+    {
+        Lose, 
+        Win,
+        Tie,
+    }
 
 }

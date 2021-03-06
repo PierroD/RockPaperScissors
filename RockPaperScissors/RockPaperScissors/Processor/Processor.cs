@@ -27,7 +27,10 @@ namespace RockPaperScissors
                     break;
                 case MessageType.GameInfo:
                     setGameInfo(message);
-                    toogleGame_View(form, message);
+                    toogleGame_View(form, true);
+                    break;
+                case MessageType.NextRound:
+                    setNextRoundInfo(form, message);
                     break;
             }
         }
@@ -44,23 +47,40 @@ namespace RockPaperScissors
         public static void setGameInfo(Encapsulation message)
         {
             var gameInfo = Encapsulation.Deserialize<SharedClasses.GameInfo>(message);
+            GameInfo.myId = gameInfo.playerId;
             GameInfo.UniqueId = gameInfo.UniqueId;
+            GameInfo.RoundGuid = gameInfo.FirstRoundGuid;
             GameInfo.BestOf = gameInfo.BestOf;
             GameInfo.TimeToAnswer = gameInfo.TimeToAnswer;
             GameInfo.EnnemyName = gameInfo.EnnemyName;
         }
 
-        public static void toogleGame_View(Form form, Encapsulation message)
+        public static void toogleGame_View(Form form, bool enable)
         {
             form.Invoke(new MethodInvoker(delegate
             {
-                form.Controls.Find("pnl_Matchmaking", true).FirstOrDefault().Visible = false;
-                form.Controls.Find("pnl_gameChoices", true).FirstOrDefault().Visible = true;
-                form.Controls.Find("pnl_results", true).FirstOrDefault().Visible = true;
+                form.Controls.Find("pnl_Matchmaking", true).FirstOrDefault().Visible = !enable;
+                form.Controls.Find("pnl_gameChoices", true).FirstOrDefault().Visible = enable;
+                form.Controls.Find("pnl_results", true).FirstOrDefault().Visible = enable;
                 form.Controls.Find("lbl_ennemy", true).FirstOrDefault().Text = GameInfo.EnnemyName;
+                form.Controls.Find("lbl_bestOf", true).FirstOrDefault().Text += GameInfo.BestOf.ToString();
             }));
         }
 
+        public static void setNextRoundInfo(Form form, Encapsulation message)
+        {
+            var roundInfo = Encapsulation.Deserialize<SharedClasses.RoundInfo>(message);
+            GameInfo.RoundGuid = roundInfo.UniqueId;
+
+            if (roundInfo.PlayerWinStatus != WinStatus.Tie)
+            {
+                string label_name = (roundInfo.PlayerWinStatus == WinStatus.Win) ? "lbl_youScore" : "lbl_ennemyScore";
+                form.Invoke(new MethodInvoker(delegate
+                {
+                    form.Controls.Find(label_name, true).FirstOrDefault().Text = $"{(int.Parse(form.Controls.Find(label_name, true).FirstOrDefault().Text)+1)}";
+                }));
+            }
+        }
 
     }
 }

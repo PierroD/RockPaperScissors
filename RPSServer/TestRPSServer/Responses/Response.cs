@@ -14,7 +14,7 @@ namespace TestRPSServer
     {
         public static void DiscoverResponse(Player player)
         {
-            SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GenericMessage { Message = "Give me your informations"}, MessageType.Discover)));
+            SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GenericMessage { Message = "Give me your informations" }, MessageType.Discover)));
 
         }
 
@@ -28,7 +28,28 @@ namespace TestRPSServer
         {
             Guid roundGuid = Guid.NewGuid();
             foreach (Player player in game.players)
-                SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GameInfo { UniqueId = game.UniqueId, FirstRoundGuid = roundGuid, BestOf = game.BestOf, TimeToAnswer = game.TimeToAnswer, EnnemyName = game.players.FirstOrDefault(p => p.id != player.id).name }, MessageType.GameInfo)));
+                SocketHelper.WriteToPlayer(player, Encapsulation.Serialize(Encapsulation.FromValue(new GameInfo { playerId = player.id, UniqueId = game.UniqueId, FirstRoundGuid = roundGuid, BestOf = game.BestOf, BestOfScore = 0, TimeToAnswer = game.TimeToAnswer, EnnemyName = game.players.FirstOrDefault(p => p.id != player.id).name }, MessageType.GameInfo)));
+        }
+
+        public static void NextRoundResponse(Game game)
+        {
+            Guid roundGuid = Guid.NewGuid();
+            foreach (Player player in game.players)
+            {
+                WinStatus winStatus = getGameResult(game, player);
+                byte[] response = Encapsulation.Serialize(Encapsulation.FromValue(new RoundInfo { UniqueId = roundGuid, PlayerWinStatus = winStatus }, MessageType.NextRound));
+                SocketHelper.WriteToPlayer(player, response);
+            }
+        }
+
+        public static WinStatus getGameResult(Game game, Player player)
+        {
+            if (game.Rounds.Last().Winner != null)
+                if (game.Rounds.Last().Winner.id == player.id)
+                    return WinStatus.Win;
+                else
+                    return WinStatus.Lose;
+            return WinStatus.Tie;
         }
     }
 }

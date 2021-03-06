@@ -29,7 +29,7 @@ namespace RockPaperScissors
 
         public static void AnswerResponse(TcpClients client, Choice playerChoice, int TimeToAnswer)
         {
-            SocketHelper.WriteToServer(client, Encapsulation.Serialize(Encapsulation.FromValue(new Answer { GameId = GameInfo.UniqueId, TimeToAnswer = TimeToAnswer, playerChoice = playerChoice }, MessageType. Answer)));
+            SocketHelper.WriteToServer(client, Encapsulation.Serialize(Encapsulation.FromValue(new Answer { GameId = GameInfo.UniqueId, RoundId = GameInfo.RoundGuid, TimeToAnswer = TimeToAnswer, playerChoice = playerChoice }, MessageType.Answer)));
 
         }
     }
