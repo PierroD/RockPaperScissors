@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharedClasses;
 using RockPaperScissors.Views;
+using RockPaperScissors.Configs;
+using System.IO;
+using System.Reflection;
 
 namespace RockPaperScissors
 {
@@ -30,7 +33,8 @@ namespace RockPaperScissors
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _client = new TcpClients("127.0.0.1", 4444);
+            Config config = new Config($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\client.ini");
+            _client = new TcpClients(config.serverIpAddress, config.serverPort);
         }
 
         private void Form1_Shown(object sender, EventArgs e)

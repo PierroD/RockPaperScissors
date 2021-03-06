@@ -73,7 +73,7 @@ namespace TestRPSServer
         private static void CheckWhoWin(Game current_game)
         {
             Round current_round = current_game.Rounds.Last();
-            if (current_round.Results.Count == 2) // number of clients, will be stored in a .ini file
+            if (current_round.Results.Count == Configs.Config.numberOfPlayerPerGame)
             {
                 if (current_round.Results[0].playerChoice == current_round.Results[1].playerChoice)
                 {

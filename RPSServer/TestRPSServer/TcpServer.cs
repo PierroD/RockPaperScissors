@@ -15,9 +15,9 @@ namespace TestRPSServer
         private TcpListener _server;
         private int _clients_number;
         private List<Player> _players = new List<Player>();
-        public TcpServer(int port)
+        public TcpServer(string ipAddress, int port)
         {
-            _server = new TcpListener(IPAddress.Any, port);
+            _server = new TcpListener(IPAddress.Parse(ipAddress), port);
             _server.Start();
             Thread listeningThread = new Thread(listenClients);
             Thread MatchMakingThread = new Thread(MatchMakingHandle);
@@ -77,7 +77,7 @@ namespace TestRPSServer
                     {
                         if (player.status == Status.Searching && !MatchMakingQueue.Contains(player))
                             MatchMakingQueue.Add(player);
-                        if (MatchMakingQueue.Count >= 2) // 2 is the number of player but will be stored in a .ini file
+                        if (MatchMakingQueue.Count >= Configs.Config.numberOfPlayerPerGame)
                         {
                             foreach (Player game_player in MatchMakingQueue)
                                 game_player.status = Status.Alive;
