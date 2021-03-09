@@ -142,7 +142,8 @@ namespace RockPaperScissors
         private void btn_play_Click(object sender, EventArgs e)
         {
             Response.AnswerResponse(_client, playerChoice, 0);
-            Processor.OpenWaitingWindows(this);
+            Processor.toogleGame_View(this, false, "Wait ...");
+
         }
     }
 

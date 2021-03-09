@@ -40,6 +40,10 @@ namespace RockPaperScissors
             this.pbar_loading = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.timer_macthmaking = new System.Windows.Forms.Timer(this.components);
             this.pnl_gameChoices = new Guna.UI2.WinForms.Guna2Panel();
+            this.pbox_answer = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.pbox_Paper = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.pbox_Rock = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.pbox_Scissors = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.lbl_you = new System.Windows.Forms.Label();
             this.lbl_ennemy = new System.Windows.Forms.Label();
             this.lbl_vs = new System.Windows.Forms.Label();
@@ -47,17 +51,13 @@ namespace RockPaperScissors
             this.lbl_ennemyScore = new System.Windows.Forms.Label();
             this.pnl_results = new Guna.UI2.WinForms.Guna2Panel();
             this.lbl_bestOf = new System.Windows.Forms.Label();
-            this.pbox_answer = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.pbox_Paper = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.pbox_Rock = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.pbox_Scissors = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.pnl_Matchmaking.SuspendLayout();
             this.pnl_gameChoices.SuspendLayout();
-            this.pnl_results.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_answer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Paper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Rock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Scissors)).BeginInit();
+            this.pnl_results.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_title
@@ -134,9 +134,9 @@ namespace RockPaperScissors
             this.lbl_lookingForPlayer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_lookingForPlayer.Location = new System.Drawing.Point(79, 28);
             this.lbl_lookingForPlayer.Name = "lbl_lookingForPlayer";
-            this.lbl_lookingForPlayer.Size = new System.Drawing.Size(106, 13);
+            this.lbl_lookingForPlayer.Size = new System.Drawing.Size(144, 13);
             this.lbl_lookingForPlayer.TabIndex = 10;
-            this.lbl_lookingForPlayer.Text = "Looking for players";
+            this.lbl_lookingForPlayer.Text = "Looking for an ennemy . . .";
             // 
             // pbar_loading
             // 
@@ -173,6 +173,63 @@ namespace RockPaperScissors
             this.pnl_gameChoices.Size = new System.Drawing.Size(298, 216);
             this.pnl_gameChoices.TabIndex = 10;
             this.pnl_gameChoices.Visible = false;
+            // 
+            // pbox_answer
+            // 
+            this.pbox_answer.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_answer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.pbox_answer.Location = new System.Drawing.Point(33, 91);
+            this.pbox_answer.Name = "pbox_answer";
+            this.pbox_answer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_answer.ShadowDecoration.Parent = this.pbox_answer;
+            this.pbox_answer.Size = new System.Drawing.Size(20, 20);
+            this.pbox_answer.TabIndex = 6;
+            this.pbox_answer.TabStop = false;
+            // 
+            // pbox_Paper
+            // 
+            this.pbox_Paper.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Paper.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbox_Paper.Image = global::RockPaperScissors.Properties.Resources.paper;
+            this.pbox_Paper.Location = new System.Drawing.Point(115, 15);
+            this.pbox_Paper.Name = "pbox_Paper";
+            this.pbox_Paper.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_Paper.ShadowDecoration.Parent = this.pbox_Paper;
+            this.pbox_Paper.Size = new System.Drawing.Size(70, 70);
+            this.pbox_Paper.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_Paper.TabIndex = 3;
+            this.pbox_Paper.TabStop = false;
+            this.pbox_Paper.Click += new System.EventHandler(this.Choice_Click);
+            // 
+            // pbox_Rock
+            // 
+            this.pbox_Rock.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Rock.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbox_Rock.Image = global::RockPaperScissors.Properties.Resources.rock;
+            this.pbox_Rock.Location = new System.Drawing.Point(9, 15);
+            this.pbox_Rock.Name = "pbox_Rock";
+            this.pbox_Rock.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_Rock.ShadowDecoration.Parent = this.pbox_Rock;
+            this.pbox_Rock.Size = new System.Drawing.Size(70, 70);
+            this.pbox_Rock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_Rock.TabIndex = 2;
+            this.pbox_Rock.TabStop = false;
+            this.pbox_Rock.Click += new System.EventHandler(this.Choice_Click);
+            // 
+            // pbox_Scissors
+            // 
+            this.pbox_Scissors.BackColor = System.Drawing.Color.Transparent;
+            this.pbox_Scissors.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbox_Scissors.Image = global::RockPaperScissors.Properties.Resources.scissors;
+            this.pbox_Scissors.Location = new System.Drawing.Point(221, 15);
+            this.pbox_Scissors.Name = "pbox_Scissors";
+            this.pbox_Scissors.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbox_Scissors.ShadowDecoration.Parent = this.pbox_Scissors;
+            this.pbox_Scissors.Size = new System.Drawing.Size(70, 70);
+            this.pbox_Scissors.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_Scissors.TabIndex = 4;
+            this.pbox_Scissors.TabStop = false;
+            this.pbox_Scissors.Click += new System.EventHandler(this.Choice_Click);
             // 
             // lbl_you
             // 
@@ -258,63 +315,6 @@ namespace RockPaperScissors
             this.lbl_bestOf.Text = "BestOf : ";
             this.lbl_bestOf.Visible = false;
             // 
-            // pbox_answer
-            // 
-            this.pbox_answer.BackColor = System.Drawing.Color.Transparent;
-            this.pbox_answer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.pbox_answer.Location = new System.Drawing.Point(33, 91);
-            this.pbox_answer.Name = "pbox_answer";
-            this.pbox_answer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pbox_answer.ShadowDecoration.Parent = this.pbox_answer;
-            this.pbox_answer.Size = new System.Drawing.Size(20, 20);
-            this.pbox_answer.TabIndex = 6;
-            this.pbox_answer.TabStop = false;
-            // 
-            // pbox_Paper
-            // 
-            this.pbox_Paper.BackColor = System.Drawing.Color.Transparent;
-            this.pbox_Paper.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbox_Paper.Image = global::RockPaperScissors.Properties.Resources.paper;
-            this.pbox_Paper.Location = new System.Drawing.Point(115, 15);
-            this.pbox_Paper.Name = "pbox_Paper";
-            this.pbox_Paper.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pbox_Paper.ShadowDecoration.Parent = this.pbox_Paper;
-            this.pbox_Paper.Size = new System.Drawing.Size(70, 70);
-            this.pbox_Paper.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbox_Paper.TabIndex = 3;
-            this.pbox_Paper.TabStop = false;
-            this.pbox_Paper.Click += new System.EventHandler(this.Choice_Click);
-            // 
-            // pbox_Rock
-            // 
-            this.pbox_Rock.BackColor = System.Drawing.Color.Transparent;
-            this.pbox_Rock.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbox_Rock.Image = global::RockPaperScissors.Properties.Resources.rock;
-            this.pbox_Rock.Location = new System.Drawing.Point(9, 15);
-            this.pbox_Rock.Name = "pbox_Rock";
-            this.pbox_Rock.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pbox_Rock.ShadowDecoration.Parent = this.pbox_Rock;
-            this.pbox_Rock.Size = new System.Drawing.Size(70, 70);
-            this.pbox_Rock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbox_Rock.TabIndex = 2;
-            this.pbox_Rock.TabStop = false;
-            this.pbox_Rock.Click += new System.EventHandler(this.Choice_Click);
-            // 
-            // pbox_Scissors
-            // 
-            this.pbox_Scissors.BackColor = System.Drawing.Color.Transparent;
-            this.pbox_Scissors.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbox_Scissors.Image = global::RockPaperScissors.Properties.Resources.scissors;
-            this.pbox_Scissors.Location = new System.Drawing.Point(221, 15);
-            this.pbox_Scissors.Name = "pbox_Scissors";
-            this.pbox_Scissors.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pbox_Scissors.ShadowDecoration.Parent = this.pbox_Scissors;
-            this.pbox_Scissors.Size = new System.Drawing.Size(70, 70);
-            this.pbox_Scissors.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbox_Scissors.TabIndex = 4;
-            this.pbox_Scissors.TabStop = false;
-            this.pbox_Scissors.Click += new System.EventHandler(this.Choice_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,12 +338,12 @@ namespace RockPaperScissors
             this.pnl_Matchmaking.ResumeLayout(false);
             this.pnl_Matchmaking.PerformLayout();
             this.pnl_gameChoices.ResumeLayout(false);
-            this.pnl_results.ResumeLayout(false);
-            this.pnl_results.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_answer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Paper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Rock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Scissors)).EndInit();
+            this.pnl_results.ResumeLayout(false);
+            this.pnl_results.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

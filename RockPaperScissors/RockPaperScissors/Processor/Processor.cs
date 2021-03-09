@@ -32,7 +32,7 @@ namespace RockPaperScissors
                     toogleGame_View(form, true);
                     break;
                 case MessageType.NextRound:
-                    CloseWaitingWindows();
+                    toogleGame_View(form, true);
                     setNextRoundInfo(form, message);
                     break;
                 case MessageType.GameEnd:
@@ -60,30 +60,18 @@ namespace RockPaperScissors
             GameInfo.EnnemyName = gameInfo.EnnemyName;
         }
 
-        private static void toogleGame_View(Form form, bool enable)
+        public static void toogleGame_View(Form form, bool enable, string lbl_message = "Looking for an ennemy . . .")
         {
             form.Invoke(new MethodInvoker(delegate
             {
                 form.Controls.Find("pnl_Matchmaking", true).FirstOrDefault().Visible = !enable;
+                form.Controls.Find("lbl_lookingForPlayer", true).FirstOrDefault().Text = lbl_message;
                 form.Controls.Find("pnl_gameChoices", true).FirstOrDefault().Visible = enable;
                 form.Controls.Find("pnl_results", true).FirstOrDefault().Visible = enable;
                 form.Controls.Find("lbl_bestOf", true).FirstOrDefault().Visible = enable;
                 form.Controls.Find("lbl_ennemy", true).FirstOrDefault().Text = GameInfo.EnnemyName;
-                form.Controls.Find("lbl_bestOf", true).FirstOrDefault().Text += GameInfo.BestOf.ToString();
+                form.Controls.Find("lbl_bestOf", true).FirstOrDefault().Text = $"Best Of : {GameInfo.BestOf}";
             }));
-        }
-
-        static Thread waitingThread;
-        public static void OpenWaitingWindows(Form form)
-        {
-            waitingThread = new Thread(() => openAppWindow.OpenWindow(form, new Form_Waiting()));
-            waitingThread.Start();
-        }
-
-        private static void CloseWaitingWindows()
-        {
-            if (waitingThread.IsAlive)
-                waitingThread.Abort();
         }
 
 
